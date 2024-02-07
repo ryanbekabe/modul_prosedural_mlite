@@ -28,7 +28,7 @@ $searchQuery = $_POST['searchQuery'];
 $sql = "SELECT `$namatabledb`.`$kolom3`,`$namatabledb`.`$kolom2`,`$namatabledb`.`$kolom1`
     FROM `$namatabledb`
     INNER JOIN `$namatabledbb` ON `$namatabledb`.`$kolom1` = `$namatabledbb`.`$kolom1`
-    WHERE `$namatabledb`.`$kolom3` LIKE '%$searchQuery%'
+    WHERE `$namatabledbb`.`$kolom4b` = '1' AND `$namatabledb`.`$kolom3` LIKE '%$searchQuery%'
     LIMIT 10";
 
 // $sql = "SELECT $namatabledb.$kolom1, $namatabledb.$kolom2, $namatabledb.$kolom3 FROM $namatabledb WHERE $namatabledb.$kolom3 LIKE '%$searchQuery%' LIMIT 10";

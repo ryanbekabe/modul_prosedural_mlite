@@ -264,7 +264,8 @@ echo "<br>";
 
     <!-- Formulir pencarian dan checkbox -->
     <form action="" method="POST">
-        <input type="text" id="textnoorder" name="textnoorder" value="<?php echo $varnoorderx; ?>">
+        <label for="NoOrder">Nomor Order: </label><input type="text" id="textnoorder" name="textnoorder" value="<?php echo $varnoorderx; ?>"> (Refresh dulu halaman ini jika nomor order masih kosong)
+        <br>
         <br>
         <label for="search">Cari Sample Pemeriksaan:</label>
         <input type="text" id="search" name="search" autocomplete="off">

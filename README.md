@@ -4,7 +4,7 @@ git init
 
 git add .
 
-git commit -m "Commit 2 - Permintaan Lab. - Perbaikan anti duplikasi permintaan - 07022024"
+git commit -m "Commit 3 - Permintaan Lab. - Perbaikan hanya status 1 item yang tampil bisa untuk dicari - 07022024"
 
 git branch -M main
 
