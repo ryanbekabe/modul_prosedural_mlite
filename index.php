@@ -82,7 +82,7 @@ $kolom3 = 'tgl_permintaan';
 $kolom3idtmplt = 'id_template';
 $kolom4 = 'jam_permintaan';
 $kolom4sb = 'stts_bayar';
-$kolom5 = 'tgl_sampel'; //unnostrip
+$kolom5 = 'tgl_sampel';
 $kolom6 = 'jam_sampel';
 $kolom7 = 'tgl_hasil';
 $kolom8 = 'jam_hasil';
@@ -90,7 +90,7 @@ $kolom9 = 'dokter_perujuk';
 $kolom10 = 'status';
 $kolom11 = 'informasi_tambahan';
 $kolom12 = 'diagnosa_klinis';
-// Data yang akan ditambahkan
+
 $val1 = 'PL'.date('Ymd').'0001';
 $val2 = $id;
 $val3 = date('Y-m-d');
@@ -123,20 +123,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Nilai 2: $nilai2<br>";            
             // Lakukan operasi penyimpanan ke database atau yang lain sesuai kebutuhan Anda
 
-            $sqldpdpl = "INSERT INTO $namatabledbdpdpl ($kolom1noordr, $kolom2kdjp, $kolom3idtmplt, $kolom4sb) 
-                    VALUES                      ('$kolom1noord', '$nilai1', '$nilai2', 'Belum')";
-            if (mysqli_query($conn, $sqldpdpl)) {
-                echo "Data berhasil ditambahkan.<br>";
+            $sqlcekdpdpl = "SELECT * FROM $namatabledbdpdpl WHERE $kolom1noordr = '$kolom1noord' AND $kolom2kdjp = '$nilai1' AND $kolom3idtmplt = '$nilai2'";
+            $resultcdpdpl = mysqli_query($conn, $sqlcekdpdpl);
+            if ($resultcdpdpl->num_rows > 0) {
+                    echo "Data $kolom1noordr dan $kolom2kdjp dan $kolom3idtmplt sudah ada.<br>";
             } else {
-                echo "Error: " . $sqldpdpl . "<br>" . mysqli_error($conn);
+
+                $sqldpdpl = "INSERT INTO $namatabledbdpdpl ($kolom1noordr, $kolom2kdjp, $kolom3idtmplt, $kolom4sb) 
+                            VALUES                         ('$kolom1noord', '$nilai1', '$nilai2', 'Belum')";
+                if (mysqli_query($conn, $sqldpdpl)) {
+                    echo "Data permintaan_detail_permintaan_lab berhasil ditambahkan.<br>";
+                } else {
+                    echo "Error: " . $sqldpdpl . "<br>" . mysqli_error($conn);
+                }
             }
- 
-            $sqlppl = "INSERT INTO $namatabledbppl ($kolom1noordr, $kolom2kdjp, $kolom4sb) 
-            VALUES                      ('$kolom1noord', '$nilai1', 'Belum')";
-            if (mysqli_query($conn, $sqlppl)) {
-                echo "Data berhasil ditambahkan.<br>";
+
+            $sqlcekjp = "SELECT * FROM $namatabledbppl WHERE $kolom1noordr = '$kolom1noord' AND $kolom2kdjp = '$nilai1'";
+            $resultcjp = mysqli_query($conn, $sqlcekjp);
+            if ($resultcjp->num_rows > 0) {
+                    echo "Data kd_jenis_prw sudah ada.<br>";
             } else {
-                echo "Error: " . $sqlppl . "<br>" . mysqli_error($conn);
+                $sqlppl = "INSERT INTO $namatabledbppl ($kolom1noordr, $kolom2kdjp, $kolom4sb) 
+                            VALUES                     ('$kolom1noord', '$nilai1', 'Belum')";
+                if (mysqli_query($conn, $sqlppl)) {
+                    echo "Data kd_jenis_prw belum ada dan berhasil ditambahkan.<br>";
+                } else {
+                    echo "Error: " . $sqlppl . "<br>" . mysqli_error($conn);
+                }
             }
         }
         echo "<====================><br>";
@@ -146,11 +159,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 
-
-
 $sqlCount = "SELECT COUNT(*) as total FROM $namatabledb WHERE $kolom3 = '$val3'";
 $resultCount = $conn->query($sqlCount);
-if ($resultCount) //unnostripdr. MIRZA ADHYATMA, Sp. 
+if ($resultCount)
 {
     $row = $resultCount->fetch_assoc();
     $totalCount = $row['total'];
@@ -201,7 +212,7 @@ if ($result->num_rows > 0) {
     $statusnoorder = 0;
     echo "Nomor Rawat $id dan Tanggal Permintaan $val3 tidak ditemukan dalam tabel, dan baru saja dibuatkan.<br>";
     $sql = "INSERT INTO $namatabledb ($kolom1, $kolom2, $kolom3, $kolom4, $kolom5, $kolom6, $kolom7, $kolom8, $kolom9, $kolom10, $kolom11, $kolom12) 
-            VALUES                     ('$val1b', '$val2', '$val3', '$val4', '$val5', '$val6', '$val7', '$val8', '$kolom1dokx', '$val10', '$val11', '$val12')";
+            VALUES                   ('$val1b', '$val2', '$val3', '$val4', '$val5', '$val6', '$val7', '$val8', '$kolom1dokx', '$val10', '$val11', '$val12')";
     if (mysqli_query($conn, $sql)) {
         echo "Data berhasil ditambahkan.<br>";
     } else {
