@@ -4,7 +4,7 @@ git init
 
 git add .
 
-git commit -m "Commit 4 - Permintaan Lab. - Penyempurnaan fitur pencarian item untuk sample lab - 20022024"
+git commit -m "Commit 5 - Permintaan Lab. - Penyempurnaan fitur pencarian item untuk sample lab, ketinggalan form_rincian - 20022024"
 
 git branch -M main
 

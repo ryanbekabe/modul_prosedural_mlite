@@ -52,7 +52,11 @@
                           // Logika yang akan dijalankan saat link diklik
                           alert('Link button diklik!');
                       };
-                  }
+                      var popupWindowLab = window.open(resultLinkElementl.href, 'PopUpLab', 'width=600,height=400');
+                      if (window.focus) {
+                        popupWindowLab.focus();
+                      }
+                   }
               }
           </script>
           <div class="form-group">
@@ -82,10 +86,13 @@
             </div>
             <label for="" class="col-sm-3 control-label">Lab. mode 2</label>
             <div class="col-sm-4">
-              <p>User: <span id="resultusermed"></span></p>
+              <p><span id="resultresultusermed" style="display: none;">User: <span id="resultusermed"></span></p>
               <!-- <input type="text" name="laboratorium2" class="form-control" placeholder="Nama Layanan" value=""> -->
               <!-- <input type="text" id="laboratorium3" class="form-control" placeholder="Nama Layanan" value=""> -->
-              <button onclick="copyToMessageBox()">Aktifkan mode 2</button> <a href="#" name="resultLink" id="resultLinkx" onclick="return false;">Klik Mode 2</a>
+              <button onclick="copyToMessageBox()" class="btn btn-xs btn-info"><i class="fa fa-file-o"></i><span class="hidden-xs"> Cari item sample Lab.</span></button>
+              <span id="resultLink" style="display: none;">
+                <a href="#" name="resultLink" id="resultLinkx" onclick="return false;">Klik Mode 2</a>
+              </span>
             </div>
           </div>
         </div>
