@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modul Pencarian RME</title>
-    <script src="jquery-3.6.4.min.js"></script>
+    <!-- <script src="jquery-3.6.4.min.js"></script> -->
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 </head>
 <body>
     <h2>Pencarian Sample Lab.</h2>
@@ -53,9 +59,11 @@ if (isset($_GET['id']) && isset($_GET["un"]) && !empty($_GET["id"]) && !empty($_
     // Dapatkan nilai 'id'
     $id = $_GET['id'];
     $un = sanitize($_GET['un']);
-    echo "Nilai id dan un yang diterima: $id, $un";
+    // echo "Nilai id dan un yang diterima: $id, $un";
+    echo "";
 } else {
-    echo "Tidak ada parameter 'id' dalam URL.";
+    // echo "Tidak ada parameter 'id' dalam URL.";
+    echo "";
 }
 
 if (isset($_GET['kd_jenis_prw'])){
@@ -65,7 +73,7 @@ if (isset($_GET['kd_jenis_prw'])){
 
 $unnostrip = strstr($un, '-', true);
 
-echo '<br>';
+// echo '<br>';
 
 $namatabledbppl = 'permintaan_pemeriksaan_lab';
 $namatabledbdpdpl = 'permintaan_detail_permintaan_lab';
@@ -166,69 +174,76 @@ if ($resultCount)
     $row = $resultCount->fetch_assoc();
     $totalCount = $row['total'];
     $totalCountNext = $totalCount + 1;
-    echo "totalCount:" . $totalCount ."<br>";
-    echo "totalCountNext:" . $totalCountNext ."<br>";
+    // echo "totalCount:" . $totalCount ."<br>";
+    // echo "totalCountNext:" . $totalCountNext ."<br>";
     $varlentotal = strlen($totalCount);
-    echo "varlentotal: " . $varlentotal . "<br>";
+    // echo "varlentotal: " . $varlentotal . "<br>";
     if ($varlentotal == 1) {
         $varnextnoorder = "000". $totalCountNext;
-        echo "varnextnoorder 000: ".$varnextnoorder."<br>";
+        // echo "varnextnoorder 000: ".$varnextnoorder."<br>";
     }elseif($varlentotal == 2) {
         $varnextnoorder = "00" . $totalCountNext;
-        echo "varnextnoorder 00: ".$varnextnoorder."<br>";
+        // echo "varnextnoorder 00: ".$varnextnoorder."<br>";
     }elseif($varlentotal == 3) {
         $varnextnoorder = "0" . $totalCountNext;
-        echo "varnextnoorder 0: ".$varnextnoorder."<br>";
+        // echo "varnextnoorder 0: ".$varnextnoorder."<br>";
     }elseif($varlentotal == 4) {
         $varnextnoorder = $totalCountNext;
-        echo "varnextnoorder NULL: ".$varnextnoorder."<br>";
+        // echo "varnextnoorder NULL: ".$varnextnoorder."<br>";
     }
 }
 
-echo "<br>kolom2dok: " . $kolom2dok . " - " . $un ."<br>";
+// echo "<br>kolom2dok: " . $kolom2dok . " - " . $un ."<br>";
 $sqldok = "SELECT * FROM $namatabledbdok WHERE $kolom2dok = '$un'";
-echo $sqldok . "<br>";
+// echo $sqldok . "<br>";
 $resultdok = mysqli_query($conn, $sqldok);
 if ($resultdok->num_rows > 0) {
     while ($rowdok = $resultdok->fetch_assoc()) {
         $kolom1dokx = $rowdok[$kolom1dok];
-        echo "<br>kolom1dokx: " . $kolom1dokx."<br>";
+        // echo "<br>kolom1dokx: " . $kolom1dokx."<br>";
     }
 }
 
 $val1b = 'PL'.date('Ymd').$varnextnoorder;
-echo "varnextnoorder: " . $val1b . "<br>";
+// echo "varnextnoorder: " . $val1b . "<br>";
 $sql = "SELECT * FROM $namatabledb WHERE $kolom2 = '$id' AND $kolom3 = '$val3'";
 $result = mysqli_query($conn, $sql);
 //if (mysqli_num_rows($result) > 0) {
 if ($result->num_rows > 0) {
-    echo "Nomor Rawat $id dan Tanggal Permintaan $val3 sudah ada dalam tabel.";
+    // echo "Nomor Rawat $id dan Tanggal Permintaan $val3 sudah ada dalam tabel.";
     while ($row = $result->fetch_assoc()) {
         $statusnoorder = 1;
         $varnoorderx = $row[$kolom1];
-        echo "<br>kolom1:" . $varnoorderx."<br>";
+        // echo "<br>kolom1:" . $varnoorderx."<br>";
     }
 } else {
     $statusnoorder = 0;
-    echo "Nomor Rawat $id dan Tanggal Permintaan $val3 tidak ditemukan dalam tabel, dan baru saja dibuatkan.<br>";
+    $currentUrl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    // echo "<br>URL lengkap dengan parameter: $currentUrl <br>";
+    // echo "<br>Refresh dulu sekali (sudah otomatis) menggunakan : $currentUrl <br>";
+    echo "<br>Halaman ini akan melakukan refresh otomatis dalam 3 detik, dan tulisan ini akan hilang : $currentUrl <br>";
+    echo "<meta http-equiv='refresh' content='3'>";
+
+    // echo "Nomor Rawat $id dan Tanggal Permintaan $val3 tidak ditemukan dalam tabel, dan baru saja dibuatkan.<br>";
     $sql = "INSERT INTO $namatabledb ($kolom1, $kolom2, $kolom3, $kolom4, $kolom5, $kolom6, $kolom7, $kolom8, $kolom9, $kolom10, $kolom11, $kolom12) 
             VALUES                   ('$val1b', '$val2', '$val3', '$val4', '$val5', '$val6', '$val7', '$val8', '$kolom1dokx', '$val10', '$val11', '$val12')";
     if (mysqli_query($conn, $sql)) {
-        echo "Data berhasil ditambahkan.<br>";
+        // echo "Data berhasil ditambahkan.<br>";
+        echo "";
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
     // mysqli_close($conn);
 }
 
-echo "Link saat ini: " . $currentURL . "<br>";;
+// echo "Link saat ini: " . $currentURL . "<br>";;
 
 if($vargetkdjenisprw != NULL){
-    echo "vargetkdjenisprw:" . $vargetkdjenisprw. "<br>";
+    // echo "vargetkdjenisprw:" . $vargetkdjenisprw. "<br>";
 }
 
-echo "<br>statusnoorder: " .$statusnoorder . "<br>";
-echo "<br>";
+// echo "<br>statusnoorder: " .$statusnoorder . "<br>";
+// echo "<br>";
 // if($statusnoorder == 1){
 //     echo "Tampilkan list jenis perawatan";
 // }
@@ -264,17 +279,17 @@ echo "<br>";
 
     <!-- Formulir pencarian dan checkbox -->
     <form action="" method="POST">
-        <label for="NoOrder">Nomor Order: </label><input type="text" id="textnoorder" name="textnoorder" value="<?php echo $varnoorderx; ?>"> (Refresh dulu halaman ini jika nomor order masih kosong)
-        <br>
-        <br>
+    <div class="container">
+        <span id="resulttextnoorder" style="display: none;"><label for="NoOrder">Nomor Order: </label><input type="text" id="textnoorder" name="textnoorder" value="<?php echo $varnoorderx; ?>"> (Refresh dulu halaman ini jika nomor order masih kosong)</span>
         <label for="search">Cari Sample Pemeriksaan:</label>
         <input type="text" id="search" name="search" autocomplete="off">
         <div id="searchResults"></div>
 
         <!-- Checkbox untuk hasil pencarian -->
         <div id="checkboxContainer"></div>
-
-        <input type="submit" value="Simpan">
+            <button type="submit" class="btn btn-success">Simpan</button>
+        </div>
+        <!-- <input type="submit" value="Simpan"> -->
     </form>
     <!-- Skrip JavaScript -->
     <script>
