@@ -118,7 +118,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $selectedOptions = $_POST['selectedOptions'];
 
         // Menampilkan pilihan yang dipilih
-        echo "<div id='info_berhasil_disimpan' style='display: none;'>";
         echo "<====================><br>";
         echo "Pilihan yang dipilih:<br>";
         foreach ($selectedOptions as $option) {
@@ -162,7 +161,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
         echo "<====================><br>";
-        echo "</div>";
     } else {
         echo "Tidak ada pilihan yang dipilih.";
     }

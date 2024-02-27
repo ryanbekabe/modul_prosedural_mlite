@@ -25,7 +25,7 @@ $searchQuery = $_POST['searchQuery'];
 //         WHERE $namatabledb.$kolom3 LIKE '%$searchQuery%'";
 //             // -- OR nama_tabel2.nama_kolom2 LIKE '%$searchQuery%'";
 
-$sql = "SELECT `$namatabledb`.`$kolom3`,`$namatabledb`.`$kolom2`,`$namatabledb`.`$kolom1`,`$namatabledbb`.`$kolom2b`
+$sql = "SELECT `$namatabledb`.`$kolom3`,`$namatabledb`.`$kolom2`,`$namatabledb`.`$kolom1`
     FROM `$namatabledb`
     INNER JOIN `$namatabledbb` ON `$namatabledb`.`$kolom1` = `$namatabledbb`.`$kolom1`
     WHERE `$namatabledbb`.`$kolom4b` = '1' AND `$namatabledb`.`$kolom3` LIKE '%$searchQuery%'
@@ -37,7 +37,7 @@ $result = $conn->query($sql);
 // Menampilkan hasil rekomendasi sebagai checkbox
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        echo "<input type='checkbox' name='selectedOptions[]' value='" . $row[$kolom1] . "|" . $row[$kolom2] . "'>".  $row[$kolom3] . " ->> " . $row[$kolom1] . " (" . $row[$kolom2b] . ") - " . $row[$kolom2] . "<br>";
+        echo "<input type='checkbox' name='selectedOptions[]' value='" . $row[$kolom1] . "|" . $row[$kolom2] . "'>".  $row[$kolom3] . " - " . $row[$kolom1] . " - " . $row[$kolom2] . "<br>";
     }
 } else {
     echo "<div>Tidak ada hasil.</div>";

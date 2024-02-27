@@ -4,7 +4,7 @@ git init
 
 git add .
 
-git commit -m "Commit 5 - Permintaan Lab. - Penyempurnaan fitur pencarian item untuk sample lab, ketinggalan form_rincian - 20022024"
+git commit -m "Commit 6 - Permintaan Lab. - Penyempurnaan fitur pencarian item untuk sample lab dengan keterangan nama paket template dari nama item"
 
 git branch -M main
 
@@ -24,9 +24,9 @@ mlite/themes/admin/index.html
 
 ___
 
-Fitur Permintaan Lab. - 09:57:16 07/02/2024
+Fitur Permintaan Lab. - 09:23:58 27/02/2024
 
-Mencari item sample permeriksaan Lab, berdasarkan nama item, bukan nama template
+Mencari item sample permeriksaan Lab, berdasarkan nama item diikuti nama template, bukan nama template saja
 
 ___
 
